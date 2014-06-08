@@ -845,6 +845,18 @@ namespace NHibernate.Hql.Ast
 		}
 	}
 
+    public class HqlDoubleMethodCall : HqlExpression
+    {
+        public HqlDoubleMethodCall(IASTFactory factory, string methodNameOne, IEnumerable<HqlExpression> parametersOne, string methodNameTwo, IEnumerable<HqlExpression> parametersTwo)
+            : base(HqlSqlWalker.METHOD_CALL, "method", factory)
+        {
+            AddChild(new HqlIdent(factory, methodNameOne));
+            AddChild(new HqlExpressionList(factory, parametersOne));
+            AddChild(new HqlIdent(factory, methodNameTwo));
+            AddChild(new HqlExpressionList(factory, parametersTwo));
+        }
+    }
+
 	public class HqlBooleanMethodCall : HqlBooleanExpression
 	{
 		public HqlBooleanMethodCall(IASTFactory factory, string methodName, IEnumerable<HqlExpression> parameters)
